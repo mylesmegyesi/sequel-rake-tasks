@@ -118,34 +118,34 @@ module Sequel
     attr_reader :connection_config
 
     def database_name
-      connection_config['database']
+      connection_config[:database]
     end
 
     def username
-      connection_config['username']
+      connection_config[:username]
     end
 
     def password
-      connection_config['password']
+      connection_config[:password]
     end
 
     def host
     end
 
     def host
-      connection_config['host']
+      connection_config[:host]
     end
 
     def port
-      connection_config['port']
+      connection_config[:port]
     end
 
     def charset
-      connection_config['charset'] || 'utf8'
+      connection_config[:charset] || 'utf8'
     end
 
     def collation
-      connection_config['collation'] || 'utf8_unicode_ci'
+      connection_config[:collation] || 'utf8_unicode_ci'
     end
 
     def execute(statement)
@@ -156,10 +156,14 @@ module Sequel
 
     def base_commands
       commands = %w(mysql)
-      commands << "--user=#{Shellwords.escape(username)}" unless username.blank?
-      commands << "--password=#{Shellwords.escape(password)}" unless password.blank?
-      commands << "--host=#{host}" unless host.blank?
+      commands << "--user=#{Shellwords.escape(username)}" unless blank?(username)
+      commands << "--password=#{Shellwords.escape(password)}" unless blank?(password)
+      commands << "--host=#{host}" unless blank?(host)
       commands
+    end
+
+    def blank?(str)
+      str.nil? || str.strip == ""
     end
 
   end
