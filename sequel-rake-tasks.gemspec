@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name          = 'sequel-rake-tasks'
-  gem.version       = '0.0.1'
+  gem.version       = '0.0.2'
   gem.authors       = ['Myles Megyesi', 'Steve Kim']
   gem.email         = ['myles.megyesi@gmail.com', 'skim.la@gmail.com']
   gem.description   = 'Rake tasks for Sequel'
