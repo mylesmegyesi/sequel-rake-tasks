@@ -13,5 +13,4 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency     'rake',   '~> 10.1.0'
   gem.add_runtime_dependency     'sequel', '~> 4.2'
-  gem.add_development_dependency 'rake',   '~> 10.1.0'
 end
