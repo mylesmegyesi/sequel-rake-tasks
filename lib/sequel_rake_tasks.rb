@@ -13,6 +13,7 @@ module Sequel
       :connection_config,
       :migrator_klass,
       :migrations_dir,
+      :migrations_opts,
       :schema_file,
       :seed_file,
       :structure_file
@@ -22,6 +23,7 @@ module Sequel
       @connection_config = options[:connection_config]
       @migrator_klass    = options[:migrator]
       @migrations_dir    = options[:migrations_dir]
+      @migrations_opts   = options[:migrations_opts]
       @schema_file       = options[:schema_file]
       @seed_file         = options[:seed_file]
       @structure_file    = options[:structure_file]
@@ -33,7 +35,11 @@ module Sequel
     end
 
     def migrator
-      @migrator ||= migrator_klass.new(connection, migrations_dir)
+      @migrator ||= begin
+        args = [connection, migrations_dir]
+        args << migrations_opts if migrations_opts
+        migrator_klass.new(*args)
+      end
     end
 
     def define_tasks
