@@ -81,6 +81,11 @@ module Sequel
             text = text.gsub(/ +$/, '') # remove trailing whitespace
             File.open(schema_file, 'w') { |f| f.write(text) }
           end
+
+          desc 'Loads the schema_file into the current environment\'s database'
+          task :load do
+            eval(File.read schema_file).apply(connection, :up)
+          end
         end
 
         namespace :structure do
